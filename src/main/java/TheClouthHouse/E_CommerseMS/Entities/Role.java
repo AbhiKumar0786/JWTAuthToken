@@ -3,13 +3,12 @@ package TheClouthHouse.E_CommerseMS.Entities;
 
 import TheClouthHouse.E_CommerseMS.Enum.ERole;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "role")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 

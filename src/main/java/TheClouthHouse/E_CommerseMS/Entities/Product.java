@@ -2,17 +2,18 @@ package TheClouthHouse.E_CommerseMS.Entities;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Product {
 
     @Id
@@ -21,5 +22,19 @@ public class Product {
 
     private String productName;
 
-    private Integer price;
+    private Integer stock;
+
+    private Double price;
+
+    // THIS SOLVES CONCURRENCY
+    @Version
+    private Integer version;
+
+    @OneToMany(mappedBy = "product" , cascade = CascadeType.ALL)
+    private List<CartItem> cartItemList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "productItem" , cascade = CascadeType.ALL)
+    private List<OrderItem> orderItemList  = new ArrayList<>();
 }
+
+

@@ -8,5 +8,7 @@ public class AddProductRequest {
 
     private String name;
 
-    private Integer price;
+    private Double price;
+
+    private Integer stock;
 }

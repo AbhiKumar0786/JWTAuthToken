@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import TheClouthHouse.E_CommerseMS.Entities.Cart;
 import TheClouthHouse.E_CommerseMS.Entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,6 +25,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @JsonIgnore
     private String password;
+
 
     private Collection<? extends GrantedAuthority> authorities;
 

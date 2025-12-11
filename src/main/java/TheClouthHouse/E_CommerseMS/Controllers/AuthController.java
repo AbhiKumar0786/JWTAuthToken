@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import TheClouthHouse.E_CommerseMS.Entities.Cart;
 import TheClouthHouse.E_CommerseMS.Entities.Role;
 import TheClouthHouse.E_CommerseMS.Entities.User;
 import TheClouthHouse.E_CommerseMS.Enum.ERole;
+import TheClouthHouse.E_CommerseMS.Repository.CartRepository;
 import TheClouthHouse.E_CommerseMS.Repository.RoleRepository;
 import TheClouthHouse.E_CommerseMS.Repository.UserRepository;
 import TheClouthHouse.E_CommerseMS.RequestDtos.LoginRequest;
@@ -52,6 +54,9 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+
+    @Autowired
+    private CartRepository cartRepository;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -119,8 +124,15 @@ public class AuthController {
             });
         }
 
+        Cart cart  = new Cart();
+        cart.setUser(user);
+        cart.setTotalPrice(0.0);
+        cart.setNoOfProducts(0);
+
         user.setRoles(roles);
+        user.setCart(cart);
         userRepository.save(user);
+        cartRepository.save(cart);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
